@@ -1,10 +1,20 @@
 import logo from '../assets/GloboLogo.png';
+import { logo as logoClass } from './Banner.module.css';
 
-const Banner = () => {
+const subtitleStyle = {
+    fontStyle: 'italic',
+    fontSize: 'x-large',
+    color: 'coral',
+};
+
+const Banner = ({children}) => {
     return (
-        <header>
-            <div>
-                <img src={logo} alt="Globomantics logo" />
+        <header className="row mb-4">
+            <div className='col-5'>
+                <img className={logoClass} src={logo} alt="Globomantics logo" />
+            </div>
+            <div className='col-7 mt-5' style={subtitleStyle}>
+                {children}
             </div>
         </header>
     );
