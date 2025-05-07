@@ -51,3 +51,7 @@ TestResult.xml
 Version.cs
 Version.h
 Version.cpp
+**/bin/debug
+**/bin/Debug
+**/bin/release
+**/bin/Release
