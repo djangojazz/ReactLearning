@@ -34,6 +34,6 @@ tmp/
 *.tmp
 
 #VS .NET
-**/obj
-**/Properties
-**/bin
+**/obj/
+**/Properties/
+**/bin/
