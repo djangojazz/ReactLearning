@@ -1,13 +1,12 @@
 import { useState } from "react";
 import HouseRow from "./HouseRow";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { HouseRowMem } from "./HouseRow";
 
-
-
-const HouseList = () => {
+const HouseList = ({selectHouse}) => {
     const [houses, setHouses] = useState([]);
-    
+    const counter = useRef(0);
+
     useEffect(() => {
         const fetchHouses = async () => {
         const response = await fetch("https://localhost:4000/house");
@@ -16,6 +15,7 @@ const HouseList = () => {
         };
 
         fetchHouses();
+        counter.current++;
     }, []);
 
     const addHouse = () => {
@@ -46,7 +46,7 @@ const HouseList = () => {
                 </tr>
             </thead>
             <tbody>
-                {houses.map(h => <HouseRowMem key={h.id} house={h} />)}
+                {houses.map(h => <HouseRowMem key={h.id} selectHouse={selectHouse} house={h} />)}
             </tbody>
         </table>
         <button className="btn btn-primary" onClick={addHouse}>
