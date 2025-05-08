@@ -6,6 +6,10 @@ import House from './components/House';
 
 function App() {
   const [ selectedHouse, setSelectedHouse ] = useState();
+  const setSelectedHouseWrapper = (house) => {
+    //do checks on house
+    setSelectedHouse(house);
+  }
 
   return (
     <>
@@ -13,7 +17,7 @@ function App() {
       <Suspense fallback={<h3>Loading...</h3>}>
         {selectedHouse 
           ? <House house={selectedHouse} /> 
-          : <HouseList selectHouse={setSelectedHouse}/>}
+          : <HouseList selectHouse={setSelectedHouseWrapper}/>}
       </Suspense>
     </>
   )
