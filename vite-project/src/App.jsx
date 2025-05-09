@@ -1,25 +1,31 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useCallback, useState } from 'react'
 import './App.css'
 import Banner from './components/Banner'
 import HouseList from './components/HouseList'
-import House from './components/House';
+import ErrorBoundary from './components/ErrorBoundary';
+import navValues from './helpers/navValues';
+import navigationContext from './helpers/navigationContext';
+import ComponentPicker from './components/ComponentPicker';
 
 function App() {
-  const [ selectedHouse, setSelectedHouse ] = useState();
-  const setSelectedHouseWrapper = (house) => {
-    //do checks on house
-    setSelectedHouse(house);
-  }
+  const navigate = useCallback(
+    (navTo, param) => setNav({ current: navTo, param, navigate}), 
+    []
+  );
 
+  const [ nav, setNav ] = useState({ current: navValues.home, navigate} );
   return (
-    <>
-      <Banner>Providing houses all over the world</Banner>
+    <navigationContext.Provider value={nav}>
+    <ErrorBoundary fallback="Something went wrong">
+      <Banner>
+        <div>Providing houses all over the world</div>
+        
+        </Banner>
       <Suspense fallback={<h3>Loading...</h3>}>
-        {selectedHouse 
-          ? <House house={selectedHouse} /> 
-          : <HouseList selectHouse={setSelectedHouseWrapper}/>}
+        <ComponentPicker currentNavLocation={nav.current} />
       </Suspense>
-    </>
+    </ErrorBoundary>
+    </navigationContext.Provider>
   )
 }
 

@@ -1,9 +1,12 @@
 import currencyFormatter from '../helpers/currencyFormatter.js';
-import React from 'react';
+import React, { useContext } from 'react';
+import navigationContext from '../helpers/navigationContext.js';
+import navValues from '../helpers/navValues.js';
 
-const HouseRow = ({selectHouse, house }) => {
+const HouseRow = ({ house }) => {
+    const { navigate } = useContext(navigationContext);
     return (
-        <tr onClick={() => selectHouse(house)}>
+        <tr onClick={() => navigate(navValues.house, house)}>
             <td>{house.address}</td>
             <td>{house.country}</td>
             {house.price && <td className={`${house.price >= 500000 ? "text-primary" : ""}`}>
