@@ -2,6 +2,7 @@ import currencyFormatter from "../helpers/currencyFormatter";
 import React, { useContext } from "react";
 import navigationContext from "../helpers/navigationContext";
 import { useLocation } from "react-router";
+import Bids from "./Bids";
 
 const House = () => {
   const location = useLocation();
@@ -37,6 +38,7 @@ const House = () => {
           <div className="row">
             <div className="col-12 mt-3">{house.description}</div>
           </div>
+          <Bids house={house} />
         </div>
       </div>
     </>
